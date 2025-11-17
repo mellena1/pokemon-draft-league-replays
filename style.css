@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.week-section {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.week-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.week-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 20px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.week-header h2 {
+    font-size: 1.8em;
+}
+
+.toggle-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s;
+}
+
+.battles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 25px;
+    background: #f8f9fa;
+}
+
+.battle-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.battle-card:hover {
+    border-color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.battle-header {
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.matchup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.player {
+    font-weight: 600;
+    color: #333;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 8px;
+}
+
+.vs {
+    font-weight: bold;
+    color: #f5576c;
+    font-size: 1.2em;
+    padding: 0 5px;
+}
+
+.score {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 15px;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 8px;
+    letter-spacing: 2px;
+}
+
+.game-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.replay-link {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.replay-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .battles-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+    
+    .week-header h2 {
+        font-size: 1.4em;
+    }
+    
+    .matchup {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .vs {
+        transform: rotate(90deg);
+    }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Draft League Replays</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pokemon Draft League</h1>
+            <p class="subtitle">Season 1 Battle Replays</p>
+        </header>
+
+        <main id="weeks-container">
+            <!-- Weeks will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        // Edit this data structure to add new weeks and battles
+        // Each matchup is a best of 3, so include 2-3 games per battle
+        const leagueData = {
+            weeks: [
+                {
+                    weekNumber: 1,
+                    battles: [
+                        {
+                            player1: "Cam",
+                            player2: "Jay",
+                            score: "2-1",
+                            games: [
+                                "replays/week1/cam-v-jay/g1.html",
+                                "replays/week1/cam-v-jay/g2.html",
+                                "replays/week1/cam-v-jay/g3.html"
+                            ]
+                        },
+                        {
+                            player1: "Q",
+                            player2: "Bryan",
+                            score: "2-1",
+                            games: [
+                                "replays/week1/q-v-bryan/g1.html",
+                                "replays/week1/q-v-bryan/g2.html",
+                                "replays/week1/q-v-bryan/g3.html",
+                            ]
+                        },
+                        {
+                            player1: "Andrew",
+                            player2: "Raymond",
+                            score: "2-0",
+                            games: [
+                                "replays/week1/andrew-v-ray/g1.html",
+                                "replays/week1/andrew-v-ray/g2.html",
+                            ]
+                        }
+                    ]
+                },
+                {
+                    weekNumber: 2,
+                    battles: [
+                        {
+                            player1: "Cam",
+                            player2: "Raymond",
+                            score: "2-1",
+                            games: [
+                                "replays/week2/cam-v-ray/g1.html",
+                                "replays/week2/cam-v-ray/g2.html",
+                                "replays/week2/cam-v-ray/g3.html"
+                            ]
+                        },
+                    ]
+                },
+                // Add more weeks here following the same structure
+                // Example:
+                // {
+                //     weekNumber: 2,
+                //     battles: [
+                //         {
+                //             player1: "Player 1",
+                //             player2: "Player 3",
+                //             score: "2-0",
+                //             games: [
+                //                 "replays/week2/battle1-game1.html",
+                //                 "replays/week2/battle1-game2.html"
+                //             ]
+                //         },
+                //         // ... more battles
+                //     ]
+                // }
+            ]
+        };
+
+        // Generate the weeks and battles
+        function renderLeague() {
+            const container = document.getElementById('weeks-container');
+            
+            leagueData.weeks.forEach(week => {
+                const weekSection = document.createElement('section');
+                weekSection.className = 'week-section';
+                
+                const weekHeader = document.createElement('div');
+                weekHeader.className = 'week-header';
+                weekHeader.innerHTML = `
+                    <h2>Week ${week.weekNumber}</h2>
+                    <span class="toggle-icon">▼</span>
+                `;
+                weekHeader.onclick = () => toggleWeek(weekSection);
+                
+                const battlesContainer = document.createElement('div');
+                battlesContainer.className = 'battles-container';
+                
+                week.battles.forEach((battle, index) => {
+                    const battleCard = document.createElement('div');
+                    battleCard.className = 'battle-card';
+                    
+                    // Create game links
+                    let gameLinksHTML = '<div class="game-links">';
+                    battle.games.forEach((gamePath, gameIndex) => {
+                        gameLinksHTML += `<a href="${gamePath}" class="replay-link" target="_blank">Game ${gameIndex + 1}</a>`;
+                    });
+                    gameLinksHTML += '</div>';
+                    
+                    battleCard.innerHTML = `
+                        <div class="battle-header">Battle ${index + 1}</div>
+                        <div class="matchup">
+                            <span class="player">${battle.player1}</span>
+                            <span class="vs">VS</span>
+                            <span class="player">${battle.player2}</span>
+                        </div>
+                        <div class="score">${battle.score || ''}</div>
+                        ${gameLinksHTML}
+                    `;
+                    battlesContainer.appendChild(battleCard);
+                });
+                
+                weekSection.appendChild(weekHeader);
+                weekSection.appendChild(battlesContainer);
+                container.appendChild(weekSection);
+            });
+        }
+
+        function toggleWeek(weekSection) {
+            const battlesContainer = weekSection.querySelector('.battles-container');
+            const toggleIcon = weekSection.querySelector('.toggle-icon');
+            
+            if (battlesContainer.style.display === 'none') {
+                battlesContainer.style.display = 'grid';
+                toggleIcon.textContent = '▼';
+            } else {
+                battlesContainer.style.display = 'none';
+                toggleIcon.textContent = '▶';
+            }
+        }
+
+        // Initialize the page
+        renderLeague();
+    </script>
+</body>
+</html>
